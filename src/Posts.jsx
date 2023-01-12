@@ -2,8 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+/* import moment from 'moment';
+
+function FormattedDate({ dateString }) {
+  const date = moment(dateString);
+  return <p>{date.format("MMM Do YY")}</p>;
+} */
+
 function Posts() {
   const [posts, setPosts] = useState([]);
+
+  const { id } = useParams();
 
   // const [showPosts, setShwoPosts] = useState([]);
 
@@ -12,33 +21,28 @@ function Posts() {
   useEffect(() => {
     const getPosts = async () => {
       const response = await axios.get(apiEndPoint);
-      setPosts(response.data);
+      setPosts(response.data.filter((post) => post.id === id));
       // console.log(response.data);
     };
     getPosts();
   });
 
-  const { id } = useParams();
-
   // Error handling
-  /*   const post = posts.find((post) => post === Number(id));
-  console.log(id);
-  if (!post) {
+  /*   const p = posts.filter((post) => {return post.id !== id});
+  if (!p) {
     return <p>Error Page</p>;
   } */
 
   return (
     <div>
       {posts.map((post) => {
-        return post.id === id ? (
+        return (
           <div key={post.id}>
             <h1>{post.title}</h1>
             <h3>{post.description}</h3>
             <h6>By {post.writerName}</h6>
             <h6>{post.createdAt}</h6>
           </div>
-        ) : (
-          <div></div>
         );
       })}
     </div>
