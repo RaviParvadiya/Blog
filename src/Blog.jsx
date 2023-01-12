@@ -1,12 +1,25 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Blog() {
-  const posts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const [posts, setPosts] = useState([]);
+
+  const apiEndPoint = "https://63ad0cd534c46cd7ae8f44d5.mockapi.io/blog";
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const response = await axios.get(apiEndPoint);
+      setPosts(response.data);
+      // console.log(response.data);
+    };
+    getPosts();
+  })
 
   const Navigate = useNavigate();
 
-  const handleView = (p) => {
-    Navigate(`/blog/${p}`);
+  const handleView = (id) => {
+    Navigate(`/blog/${id}`);
   };
 
   return (
@@ -15,9 +28,10 @@ function Blog() {
       <div>
         {posts.map((p) => {
           return (
-            <div key={p}>
-              <h3 >Post{p}</h3>
-              <button onClick={() => handleView(p)}>View</button>
+            <div key={p.id}>
+              <h3>{p.title}</h3>
+              <h6>By {p.writerName}</h6>
+              <button onClick={() => handleView(p.id)}>View</button>
             </div>
           );
         })}

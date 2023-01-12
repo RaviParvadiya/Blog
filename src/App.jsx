@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:p" element={<Posts />} />
+        <Route path="/blog/:id" element={<Posts />} />
         <Route path="*" element={<p>Error Page</p>} />
       </Routes>
     </div>
