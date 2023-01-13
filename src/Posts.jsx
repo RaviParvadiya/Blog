@@ -11,7 +11,7 @@ function FormattedDate({ dateString }) {
 } */
 
 function Posts() {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -24,15 +24,15 @@ function Posts() {
   useEffect(() => {
     const getPosts = async () => {
       setLoading(true);
-      const response = await axios.get(apiEndPoint + id);
-      setPost(response.data);
-      // console.log(response.data);
+        const response = await axios.get(apiEndPoint + id);
+        setPost(response.data);
+        // console.log(response.data);
       setLoading(false);
     };
     getPosts();
   }, [id]);
 
-  if (loading) return <Spinner />;
+  if(loading) return <Spinner />;
 
   // Error handling
   /*   const p = posts.filter((post) => {return post.id !== id});
