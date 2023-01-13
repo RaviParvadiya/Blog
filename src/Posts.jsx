@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Spinner from "./Spinner";
 
 /* import moment from 'moment';
 
@@ -10,22 +11,28 @@ function FormattedDate({ dateString }) {
 } */
 
 function Posts() {
-  const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState({});
+
+  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
 
   // const [showPosts, setShwoPosts] = useState([]);
 
-  const apiEndPoint = "https://63ad0cd534c46cd7ae8f44d5.mockapi.io/blog";
+  const apiEndPoint = "https://63ad0cd534c46cd7ae8f44d5.mockapi.io/blog/";
 
   useEffect(() => {
     const getPosts = async () => {
-      const response = await axios.get(apiEndPoint);
-      setPosts(response.data.filter((post) => post.id === id));
+      setLoading(true);
+      const response = await axios.get(apiEndPoint + id);
+      setPost(response.data);
       // console.log(response.data);
+      setLoading(false);
     };
     getPosts();
-  });
+  }, [id]);
+
+  if (loading) return <Spinner />;
 
   // Error handling
   /*   const p = posts.filter((post) => {return post.id !== id});
@@ -35,16 +42,12 @@ function Posts() {
 
   return (
     <div>
-      {posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <h1>{post.title}</h1>
-            <h3>{post.description}</h3>
-            <h6>By {post.writerName}</h6>
-            <h6>{post.createdAt}</h6>
-          </div>
-        );
-      })}
+      <div>
+        <h1>{post.title}</h1>
+        <h2>{post.description}</h2>
+        <h5>By {post.writerName}</h5>
+        <h6>{post.createdAt}</h6>
+      </div>
     </div>
   );
 }

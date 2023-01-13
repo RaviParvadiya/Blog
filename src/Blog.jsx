@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Grid, Typography } from "@mui/material";
+import "./blog.css";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -14,7 +16,7 @@ function Blog() {
       // console.log(response.data);
     };
     getPosts();
-  })
+  });
 
   const Navigate = useNavigate();
 
@@ -24,15 +26,25 @@ function Blog() {
 
   return (
     <div>
-      <h1>Blog</h1>
-      <div>
+      <Typography variant="h4">Blog</Typography>
+      <div className="post-grid-container">
         {posts.map((p) => {
           return (
-            <div key={p.id}>
-              <h3>{p.title}</h3>
-              <h6>By {p.writerName}</h6>
-              <button onClick={() => handleView(p.id)}>View</button>
-            </div>
+            <Grid container spacing={2} minHeight={160}>
+              <Grid item xs={12} sm={9} key={p.id}>
+                <div>
+                  <Typography variant="h4">{p.title}</Typography>
+                  <Typography variant="subtitle2">By {p.writerName}</Typography>
+                  <Button
+                    type="view"
+                    variant="contained"
+                    onClick={() => handleView(p.id)}
+                  >
+                    View
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
           );
         })}
       </div>

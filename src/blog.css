@@ -1,0 +1,15 @@
+.post-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+
+/* .root {
+    flex-grow: 1;
+  }
+  
+.postContainer {
+    background-color: theme.palette.background.paper;
+    padding: theme.spacing(2);
+    text-align: 'center';
+  } */
