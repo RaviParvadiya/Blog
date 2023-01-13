@@ -30,7 +30,7 @@ function Blog() {
       <div className="post-grid-container">
         {posts.map((p) => {
           return (
-            <Grid container spacing={2} minHeight={160}>
+            <Grid container spacing={2} minHeight={160} key={p.id}>
               <Grid item xs={12} sm={9} key={p.id}>
                 <div>
                   <Typography variant="h4">{p.title}</Typography>

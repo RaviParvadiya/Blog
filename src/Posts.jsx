@@ -13,11 +13,9 @@ function FormattedDate({ dateString }) {
 function Posts() {
   const [post, setPost] = useState([]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
-
-  // const [showPosts, setShwoPosts] = useState([]);
 
   const apiEndPoint = "https://63ad0cd534c46cd7ae8f44d5.mockapi.io/blog/";
 
@@ -26,7 +24,7 @@ function Posts() {
       setLoading(true);
         const response = await axios.get(apiEndPoint + id);
         setPost(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       setLoading(false);
     };
     getPosts();
