@@ -24,7 +24,6 @@ function Posts() {
       setLoading(true);
         const response = await axios.get(apiEndPoint + id);
         setPost(response.data);
-        console.log(response.data);
       setLoading(false);
     };
     getPosts();
