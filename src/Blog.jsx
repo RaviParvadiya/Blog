@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Grid, Typography, Box } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import "./blog.css";
 
 function Blog() {
