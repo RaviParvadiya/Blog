@@ -9,6 +9,7 @@ import {
   Box,
   CardContent,
   CardActions,
+  Container,
 } from "@mui/material";
 // import "./blog.css";
 
@@ -40,25 +41,27 @@ function Blog() {
           {posts.map((p) => {
             return (
               <Grid item lg={4} xs={12} sm={8} md={8} key={p.id} container>
-                <Paper elevation={8}>
-                  <Box p={2}>
-                    <CardContent>
-                      <Typography variant="h4">{p.title}</Typography>
-                      <Typography variant="subtitle2">
-                        By {p.writerName}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        type="view"
-                        variant="contained"
-                        onClick={() => handleView(p.id)}
-                      >
-                        View
-                      </Button>
-                    </CardActions>
-                  </Box>
-                </Paper>
+                <Container fixed>
+                  <Paper elevation={10}>
+                    <Box p={2}>
+                      <CardContent>
+                        <Typography variant="h4">{p.title}</Typography>
+                        <Typography variant="subtitle2">
+                          By {p.writerName}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button
+                          type="view"
+                          variant="contained"
+                          onClick={() => handleView(p.id)}
+                        >
+                          View
+                        </Button>
+                      </CardActions>
+                    </Box>
+                  </Paper>
+                </Container>
               </Grid>
             );
           })}
